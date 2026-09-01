@@ -26,16 +26,15 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:25px;
+    padding:28px;
     position:relative;
 }
 
-/* cahaya tipis di tengah */
 .page::before{
     content:"";
     position:absolute;
-    width:450px;
-    height:450px;
+    width:500px;
+    height:500px;
     background:radial-gradient(
         circle,
         rgba(255,255,255,.045),
@@ -44,14 +43,23 @@ body{
     pointer-events:none;
 }
 
-/* OPENING */
-
-.opening{
+.screen{
+    width:100%;
+    max-width:680px;
     text-align:center;
     position:relative;
     z-index:2;
-    animation:openingIn 2s ease;
 }
+
+.hidden{
+    display:none !important;
+}
+
+.fade{
+    animation:fadeIn 1.3s ease;
+}
+
+/* OPENING */
 
 .label{
     font-family:Arial,sans-serif;
@@ -78,68 +86,59 @@ body{
     text-transform:uppercase;
 }
 
+button{
+    cursor:pointer;
+}
+
+.enter,
+.next,
+.answer{
+    font-family:Arial,sans-serif;
+}
+
 .enter{
     margin-top:55px;
     padding:15px 42px;
     border:1px solid #444;
     background:transparent;
     color:white;
-    font-family:Arial,sans-serif;
     font-size:10px;
     letter-spacing:5px;
-    cursor:pointer;
-    transition:.5s;
+    transition:.4s;
 }
 
 .enter:hover{
     background:white;
     color:black;
-    border-color:white;
 }
 
 /* STORY */
 
-.story{
-    display:none;
-    width:100%;
-    max-width:650px;
-    text-align:center;
-    position:relative;
-    z-index:2;
-}
-
-.story.show{
-    display:block;
-    animation:storyIn 1.8s ease;
-}
-
 .number{
-    font-family:Arial,sans-serif;
     color:#555;
-    font-size:10px;
-    letter-spacing:3px;
-    margin-bottom:30px;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:4px;
+    margin-bottom:32px;
 }
 
 .text{
-    font-size:clamp(21px,5vw,32px);
-    line-height:1.65;
+    font-size:clamp(20px,5vw,31px);
+    line-height:1.7;
     font-weight:400;
 }
 
-.text span{
+.text .soft{
     color:#888;
 }
 
 .next{
     margin-top:45px;
-    border:none;
-    background:none;
+    border:0;
+    background:transparent;
     color:#777;
-    font-family:Arial,sans-serif;
     font-size:10px;
     letter-spacing:4px;
-    cursor:pointer;
     transition:.3s;
 }
 
@@ -147,42 +146,67 @@ body{
     color:white;
 }
 
-/* PAGE 2 */
-
-.page2{
-    display:none;
-    width:100%;
-    max-width:650px;
-    text-align:center;
-    position:relative;
-    z-index:2;
-}
-
-.page2.show{
-    display:block;
-    animation:storyIn 1.5s ease;
-}
+/* QUESTION */
 
 .question{
-    font-size:clamp(22px,5vw,34px);
-    line-height:1.6;
+    font-size:clamp(21px,5vw,32px);
+    line-height:1.65;
 }
 
 .line{
     width:35px;
     height:1px;
-    background:#555;
-    margin:30px auto;
+    background:#444;
+    margin:32px auto;
 }
 
 .signature{
     color:#777;
     font-size:14px;
-    margin-top:35px;
     font-style:italic;
 }
 
-@keyframes openingIn{
+/* ANSWERS */
+
+.answers{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:38px;
+}
+
+.answer{
+    width:100%;
+    padding:16px;
+    background:transparent;
+    color:#ddd;
+    border:1px solid #333;
+    font-size:10px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.answer:hover{
+    background:#fff;
+    color:#000;
+}
+
+/* FINAL */
+
+.final{
+    font-size:clamp(20px,5vw,30px);
+    line-height:1.7;
+}
+
+.small{
+    margin-top:30px;
+    color:#666;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+@keyframes fadeIn{
     from{
         opacity:0;
         transform:translateY(25px);
@@ -193,14 +217,19 @@ body{
     }
 }
 
-@keyframes storyIn{
-    from{
-        opacity:0;
-        transform:translateY(30px);
+@media(max-width:480px){
+
+    .text{
+        font-size:21px;
     }
-    to{
-        opacity:1;
-        transform:translateY(0);
+
+    .question{
+        font-size:21px;
+    }
+
+    .name{
+        letter-spacing:13px;
+        margin-left:13px;
     }
 }
 </style>
@@ -210,118 +239,320 @@ body{
 
 <div class="page">
 
-    <!-- OPENING -->
+<div class="screen">
 
-    <div class="opening" id="opening">
+<!-- OPENING -->
 
-        <div class="label">
-            a little something
-        </div>
+<section id="opening" class="fade">
 
-        <div class="name">
-            DINI
-        </div>
+    <div class="label">
+        a little something
+    </div>
 
-        <div class="subtitle">
-            there's something I never said.
-        </div>
+    <div class="name">
+        DINI
+    </div>
 
-        <button class="enter" id="enterButton">
-            ENTER
+    <div class="subtitle">
+        there's something I never said.
+    </div>
+
+    <button class="enter" id="enterButton">
+        ENTER
+    </button>
+
+</section>
+
+
+<!-- 01 -->
+
+<section id="story1" class="hidden fade">
+
+    <div class="number">
+        01 / WHERE IT STARTED
+    </div>
+
+    <div class="text">
+        Kita sebenarnya sudah saling kenal
+        sejak SMP.
+        <br><br>
+
+        Tapi rasanya aku baru benar-benar
+        mulai mengenal kamu ketika
+        kita berada dalam satu kelompok.
+        <br><br>
+
+        Semakin lama satu kelompok,
+        tanpa sadar muncul rasa yang awalnya kecil.
+        <br><br>
+
+        <span class="soft">
+        Bukan sesuatu yang langsung besar.
+        Cuma rasa nyaman yang perlahan tumbuh.
+        </span>
+    </div>
+
+    <button class="next" data-next="story2">
+        CONTINUE →
+    </button>
+
+</section>
+
+
+<!-- 02 -->
+
+<section id="story2" class="hidden fade">
+
+    <div class="number">
+        02 / WHAT MADE ME SURE
+    </div>
+
+    <div class="text">
+        Sampai akhirnya aku melihat
+        beberapa hal dari kamu.
+        <br><br>
+
+        Cara kamu menyelesaikan
+        tanggung jawabmu sendiri.
+        <br><br>
+
+        Cara kamu tetap mau membantu
+        teman ketika mereka sedang kesusahan.
+        <br><br>
+
+        <span class="soft">
+        Mungkin bagi kamu itu hal biasa.
+        Tapi buatku, justru hal-hal kecil
+        seperti itu yang membuat perasaanku
+        tumbuh lebih besar.
+        </span>
+    </div>
+
+    <button class="next" data-next="story3">
+        CONTINUE →
+    </button>
+
+</section>
+
+
+<!-- 03 -->
+
+<section id="story3" class="hidden fade">
+
+    <div class="number">
+        03 / WHY I'M SAYING THIS
+    </div>
+
+    <div class="text">
+        Aku sebenarnya cukup ragu
+        untuk menyampaikan ini.
+        <br><br>
+
+        Bukan karena aku nggak yakin
+        dengan perasaanku.
+        <br><br>
+
+        Tapi karena aku merasa
+        belum punya banyak hal
+        untuk kuberikan.
+        <br><br>
+
+        <span class="soft">
+        Jadi aku ingin memulai
+        dari sesuatu yang bisa
+        kubuat sendiri.
+        </span>
+    </div>
+
+    <button class="next" data-next="story4">
+        CONTINUE →
+    </button>
+
+</section>
+
+
+<!-- 04 -->
+
+<section id="story4" class="hidden fade">
+
+    <div class="number">
+        04 / A LITTLE EFFORT
+    </div>
+
+    <div class="text">
+        Website ini mungkin sederhana.
+        <br><br>
+
+        Aku juga nggak mengeluarkan
+        uang sepeser pun untuk membuatnya.
+        <br><br>
+
+        Tapi aku membuatnya sendiri
+        karena aku ingin ada sedikit
+        effort dariku untuk kamu.
+        <br><br>
+
+        <span class="soft">
+        Setidaknya kali ini,
+        aku ingin mencoba
+        menyampaikan sesuatu
+        dengan caraku sendiri.
+        </span>
+    </div>
+
+    <button class="next" data-next="story5">
+        CONTINUE →
+    </button>
+
+</section>
+
+
+<!-- 05 -->
+
+<section id="story5" class="hidden fade">
+
+    <div class="number">
+        05 / THE TRUTH
+    </div>
+
+    <div class="question">
+        Jadi sebenarnya...
+        <br><br>
+
+        aku membuat semua ini
+        karena ada satu hal
+        yang ingin aku sampaikan
+        langsung kepada kamu.
+    </div>
+
+    <button class="next" data-next="question">
+        ONE LAST THING →
+    </button>
+
+</section>
+
+
+<!-- PERTANYAAN -->
+
+<section id="question" class="hidden fade">
+
+    <div class="number">
+        06 / ONE QUESTION
+    </div>
+
+    <div class="question">
+        Dini,
+        <br><br>
+
+        kalau aku bilang
+        aku suka sama kamu...
+        <br><br>
+
+        <span class="soft">
+        kamu mau kasih aku kesempatan
+        untuk mengenal kamu lebih jauh?
+        </span>
+    </div>
+
+    <div class="answers">
+
+        <button class="answer" data-answer="Aku mau mencoba">
+            AKU MAU MENCOBA
+        </button>
+
+        <button class="answer" data-answer="Aku butuh waktu">
+            AKU BUTUH WAKTU
+        </button>
+
+        <button class="answer" data-answer="Aku ingin tetap seperti sekarang">
+            AKU INGIN TETAP SEPERTI SEKARANG
         </button>
 
     </div>
 
+</section>
 
-    <!-- CERITA -->
 
-    <div class="story" id="story">
+<!-- FINAL -->
 
-        <div class="number">
-            01 / SOMETHING I SHOULD SAY
-        </div>
+<section id="final" class="hidden fade">
 
-        <div class="text">
-            Sebenarnya aku nggak tahu
-            harus mulai dari mana.
-            <br><br>
-            Karena ada beberapa hal
-            yang ternyata lebih mudah
-            <span>dirasakan</span>
-            daripada diucapkan.
-        </div>
-
-        <button class="next" id="nextButton">
-            CONTINUE →
-        </button>
-
+    <div class="final">
+        Terima kasih sudah
+        membaca semuanya
+        sampai akhir.
     </div>
 
+    <div class="line"></div>
 
-    <!-- HALAMAN 2 -->
-
-    <div class="page2" id="page2">
-
-        <div class="number">
-            02 / THE REASON
-        </div>
-
-        <div class="question">
-            Entah sejak kapan,
-            tapi kehadiran kamu yang dulu 
-            mulai terasa berbeda.
-            <br><br>
-            Bukan karena kamu
-            melakukan sesuatu yang besar.
-            <br><br>
-            <span style="color:#888;">
-            Mungkin justru karena memendam perasaan yang sudah lama.
-            </span>
-        </div>
-
-        <div class="line"></div>
-
-        <div class="signature">
-            — Andika
-        </div>
-
+    <div class="signature">
+        — Andika
     </div>
 
+    <div class="small">
+        whatever your answer is,
+        i'll respect it.
+    </div>
+
+</section>
+
+</div>
 </div>
 
 
 <script>
 
+const opening = document.getElementById("opening");
+
 const enterButton =
 document.getElementById("enterButton");
 
-const nextButton =
-document.getElementById("nextButton");
+const sections =
+document.querySelectorAll("section");
 
-const opening =
-document.getElementById("opening");
+function showSection(id){
 
-const story =
-document.getElementById("story");
+    sections.forEach(section=>{
+        section.classList.add("hidden");
+    });
 
-const page2 =
-document.getElementById("page2");
+    const target =
+    document.getElementById(id);
 
+    target.classList.remove("hidden");
 
-enterButton.addEventListener("click", function(){
+    target.classList.remove("fade");
 
-    opening.style.display = "none";
+    void target.offsetWidth;
 
-    story.classList.add("show");
+    target.classList.add("fade");
+}
+
+enterButton.addEventListener("click",function(){
+
+    showSection("story1");
 
 });
 
 
-nextButton.addEventListener("click", function(){
+document.querySelectorAll(".next").forEach(button=>{
 
-    story.style.display = "none";
+    button.addEventListener("click",function(){
 
-    page2.classList.add("show");
+        showSection(this.dataset.next);
+
+    });
+
+});
+
+
+document.querySelectorAll(".answer").forEach(button=>{
+
+    button.addEventListener("click",function(){
+
+        showSection("final");
+
+    });
 
 });
 
