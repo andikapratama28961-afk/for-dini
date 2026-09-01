@@ -14,94 +14,189 @@
 }
 
 body{
-    background:#080808;
-    color:#fff;
+    background:#050505;
+    color:#f5f5f5;
     font-family:Georgia,serif;
-    min-height:100vh;
     overflow:hidden;
 }
 
 .page{
-    min-height:100vh;
+    width:100%;
+    height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
-    padding:30px;
+    padding:25px;
+    position:relative;
 }
 
+/* cahaya tipis di tengah */
+.page::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:radial-gradient(
+        circle,
+        rgba(255,255,255,.045),
+        transparent 70%
+    );
+    pointer-events:none;
+}
+
+/* OPENING */
+
 .opening{
-    animation:fade 2s ease;
+    text-align:center;
+    position:relative;
+    z-index:2;
+    animation:openingIn 2s ease;
+}
+
+.label{
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:6px;
+    color:#666;
+    text-transform:uppercase;
+    margin-bottom:25px;
 }
 
 .name{
-    font-size:clamp(55px,16vw,110px);
-    letter-spacing:18px;
-    margin-left:18px;
+    font-size:clamp(55px,16vw,105px);
     font-weight:400;
+    letter-spacing:17px;
+    margin-left:17px;
 }
 
 .subtitle{
     margin-top:20px;
-    color:#888;
     font-family:Arial,sans-serif;
-    font-size:11px;
+    font-size:10px;
     letter-spacing:4px;
+    color:#777;
     text-transform:uppercase;
 }
 
 .enter{
     margin-top:55px;
-    padding:15px 38px;
+    padding:15px 42px;
+    border:1px solid #444;
     background:transparent;
     color:white;
-    border:1px solid #555;
-    font-size:11px;
-    letter-spacing:4px;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:5px;
     cursor:pointer;
-    transition:.4s;
+    transition:.5s;
 }
 
 .enter:hover{
     background:white;
-    color:#000;
+    color:black;
+    border-color:white;
 }
+
+/* STORY */
 
 .story{
     display:none;
+    width:100%;
     max-width:650px;
-    animation:fade 1.5s ease;
+    text-align:center;
+    position:relative;
+    z-index:2;
 }
 
 .story.show{
     display:block;
+    animation:storyIn 1.8s ease;
 }
 
-.small{
-    color:#888;
+.number{
     font-family:Arial,sans-serif;
+    color:#555;
     font-size:10px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    margin-bottom:25px;
+    letter-spacing:3px;
+    margin-bottom:30px;
 }
 
-.message{
-    font-size:clamp(22px,5vw,34px);
-    line-height:1.6;
+.text{
+    font-size:clamp(21px,5vw,32px);
+    line-height:1.65;
     font-weight:400;
 }
 
-.signature{
-    margin-top:35px;
+.text span{
     color:#888;
-    font-size:14px;
 }
 
-@keyframes fade{
+.next{
+    margin-top:45px;
+    border:none;
+    background:none;
+    color:#777;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:4px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.next:hover{
+    color:white;
+}
+
+/* PAGE 2 */
+
+.page2{
+    display:none;
+    width:100%;
+    max-width:650px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+.page2.show{
+    display:block;
+    animation:storyIn 1.5s ease;
+}
+
+.question{
+    font-size:clamp(22px,5vw,34px);
+    line-height:1.6;
+}
+
+.line{
+    width:35px;
+    height:1px;
+    background:#555;
+    margin:30px auto;
+}
+
+.signature{
+    color:#777;
+    font-size:14px;
+    margin-top:35px;
+    font-style:italic;
+}
+
+@keyframes openingIn{
     from{
         opacity:0;
-        transform:translateY(20px);
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes storyIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
     }
     to{
         opacity:1;
@@ -115,8 +210,17 @@ body{
 
 <div class="page">
 
+    <!-- OPENING -->
+
     <div class="opening" id="opening">
-        <div class="name">DINI</div>
+
+        <div class="label">
+            a little something
+        </div>
+
+        <div class="name">
+            DINI
+        </div>
 
         <div class="subtitle">
             there's something I never said.
@@ -125,21 +229,57 @@ body{
         <button class="enter" id="enterButton">
             ENTER
         </button>
+
     </div>
+
+
+    <!-- CERITA -->
 
     <div class="story" id="story">
 
-        <div class="small">
-            for someone special
+        <div class="number">
+            01 / SOMETHING I SHOULD SAY
         </div>
 
-        <div class="message">
-            Ada sesuatu yang sebenarnya
-            sudah cukup lama ingin aku sampaikan.
+        <div class="text">
+            Sebenarnya aku nggak tahu
+            harus mulai dari mana.
             <br><br>
-            Tapi mungkin aku terlalu takut
-            untuk mengatakannya secara langsung.
+            Karena ada beberapa hal
+            yang ternyata lebih mudah
+            <span>dirasakan</span>
+            daripada diucapkan.
         </div>
+
+        <button class="next" id="nextButton">
+            CONTINUE →
+        </button>
+
+    </div>
+
+
+    <!-- HALAMAN 2 -->
+
+    <div class="page2" id="page2">
+
+        <div class="number">
+            02 / THE REASON
+        </div>
+
+        <div class="question">
+            Entah sejak kapan,
+            tapi kehadiran kamu yang dulu 
+            mulai terasa berbeda.
+            <br><br>
+            Bukan karena kamu
+            melakukan sesuatu yang besar.
+            <br><br>
+            <span style="color:#888;">
+            Mungkin justru karena memendam perasaan yang sudah lama.
+            </span>
+        </div>
+
+        <div class="line"></div>
 
         <div class="signature">
             — Andika
@@ -149,14 +289,42 @@ body{
 
 </div>
 
+
 <script>
-document.getElementById("enterButton").addEventListener("click", function(){
 
-    document.getElementById("opening").style.display = "none";
+const enterButton =
+document.getElementById("enterButton");
 
-    document.getElementById("story").classList.add("show");
+const nextButton =
+document.getElementById("nextButton");
+
+const opening =
+document.getElementById("opening");
+
+const story =
+document.getElementById("story");
+
+const page2 =
+document.getElementById("page2");
+
+
+enterButton.addEventListener("click", function(){
+
+    opening.style.display = "none";
+
+    story.classList.add("show");
 
 });
+
+
+nextButton.addEventListener("click", function(){
+
+    story.style.display = "none";
+
+    page2.classList.add("show");
+
+});
+
 </script>
 
 </body>
