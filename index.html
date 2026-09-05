@@ -54,7 +54,23 @@ body{
 .hidden{
     display:none !important;
 }
+.transition{
+    animation:cinematicIn 1.2s ease;
+}
 
+@keyframes cinematicIn{
+    0%{
+        opacity:0;
+        transform:translateY(18px);
+        filter:blur(6px);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+    }
+}
 .fade{
     animation:fadeIn 1.3s ease;
 }
@@ -514,6 +530,8 @@ function showSection(id){
 
     sections.forEach(section=>{
         section.classList.add("hidden");
+        section.classList.remove("fade");
+        section.classList.remove("transition");
     });
 
     const target =
@@ -521,11 +539,9 @@ function showSection(id){
 
     target.classList.remove("hidden");
 
-    target.classList.remove("fade");
-
     void target.offsetWidth;
 
-    target.classList.add("fade");
+    target.classList.add("transition");
 }
 
 enterButton.addEventListener("click",function(){
