@@ -221,7 +221,51 @@ button{
     font-size:9px;
     letter-spacing:3px;
 }
+.photo-wrap{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    margin-bottom:28px;
+}
 
+.photo-wrap img{
+    width:30%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border:1px solid #222;
+    opacity:0;
+    animation:photoIn 1s ease forwards;
+}
+
+.photo-wrap img:nth-child(2){
+    animation-delay:.25s;
+}
+
+.photo-wrap img:nth-child(3){
+    animation-delay:.5s;
+}
+
+.photo-text{
+    color:#aaa;
+    font-size:15px;
+    line-height:1.7;
+    margin:0 auto;
+    max-width:500px;
+}
+
+@keyframes photoIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+        filter:blur(5px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+    }
+    }
 @keyframes fadeIn{
     from{
         opacity:0;
@@ -422,7 +466,36 @@ button{
 
 </section>
 
+<!-- FOTO -->
 
+<section id="photos" class="hidden fade">
+
+    <div class="number">
+        05 / SOME MOMENTS
+    </div>
+
+    <div class="photo-wrap">
+
+        <img src="IMG-20260904-WA0079.jpg" alt="Dini">
+
+        <img src="IMG-20260904-WA0081.jpg" alt="Dini">
+
+        <img src="IMG-20260904-WA0084.jpg" alt="Dini">
+
+    </div>
+
+    <div class="photo-text">
+        Mungkin buat kamu ini cuma beberapa foto.
+        <br><br>
+        Tapi buatku, ada alasan kenapa
+        aku memilih menyimpannya di sini.
+    </div>
+
+    <button class="next" data-next="story5">
+        CONTINUE →
+    </button>
+
+</section>
 <!-- 05 -->
 
 <section id="story5" class="hidden fade">
